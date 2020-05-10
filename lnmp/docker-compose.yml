@@ -1,0 +1,18 @@
+version: "2"
+services:
+  nginx-ha:
+    image: 2233466866/lnmp:latest
+    container_name: lnmp
+    restart: always
+    privileged: true
+    ports:
+      - 80:80
+      #- 443:443
+      - 3306:3306
+    volumes:
+      - /var/www/:/www  #项目目录，windows的话把前边的/var/www改成自己项目的路径
+      - ./etc/nginx:/usr/local/nginx/conf
+      - /data/mysql:/data/mysql
+      - ./etc/mysql/my.cnf:/etc/my.cnf
+      #- ./etc/hosts:/etc/hosts
+    command: /usr/sbin/init
